@@ -11,8 +11,6 @@ The project itself built on microservices architecture, instead of Spring Cloud 
 
 ![App Screenshot](https://github.com/tarantulDeveloper/banking_server_kuber/blob/main/screenshots/products.png?raw=true)
 
-![App Screenshot](https://github.com/tarantulDeveloper/banking_server_kuber/blob/main/screenshots/profile.png?raw=true)
-
 ![App Screenshot](https://github.com/tarantulDeveloper/banking_server_kuber/blob/main/screenshots/register.png?raw=true)
 
 ![App Screenshot](https://github.com/tarantulDeveloper/banking_server_kuber/blob/main/screenshots/revenue.png?raw=true)
