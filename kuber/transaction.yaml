@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: transaction-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: transaction-service
+    template:
+      metadata:
+        labels:
+          app: transaction-service
+      spec:
+        containers:
+          - name: authorization-server-container
+            image: tarantul2707/transaction-service
+            imagePullPolicy: Always
+            ports:
+              - containerPort: 8080
+            env:
+              - name: DATABASE_USER
+                valueFrom:
+                  secretKeyRef:
+                    name: mysecret
+                    key: POSTGRES_USER
+              - name: DATABASE_PASSWORD
+                valueFrom:
+                  secretKeyRef:
+                    name: mysecret
+                    key: POSTGRES_PASSWORD
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: transaction-service
+spec:
+  selector:
+    app: transaction-service
+  ports:
+    - port: 8080
+      targetPort: 8080
+  type: LoadBalancer

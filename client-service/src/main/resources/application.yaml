@@ -1,0 +1,33 @@
+spring:
+
+  application:
+    name: client-service
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${AUTH_SERVER_URL:http://localhost:7070}
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+  datasource:
+    url: jdbc:postgresql://${DATABASE_URL:localhost}:${DATABASE_PORT:5432}/${DATABASE_NAME:user_microservice}
+    username: ${DATABASE_USER:postgres}
+    password: ${DATABASE_PASSWORD:pass}
+
+  cloud:
+    kubernetes:
+      loadbalancer:
+        mode: service
+
+  servlet:
+    multipart:
+      enabled: 'true'
+      max-request-size: 3MB
+      file-size-threshold: 2KB
+      max-file-size: 3MB

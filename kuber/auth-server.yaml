@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth-server
+    template:
+      metadata:
+        labels:
+          app: auth-server
+      spec:
+        containers:
+          - name: authorization-server-container
+            image: tarantul2707/auth-server
+            imagePullPolicy: Always
+            ports:
+              - containerPort: 7070
+            env:
+              - name: DATABASE_USER
+                valueFrom:
+                  secretKeyRef:
+                    name: mysecret
+                    key: POSTGRES_USER
+              - name: DATABASE_PASSWORD
+                valueFrom:
+                  secretKeyRef:
+                    name: mysecret
+                    key: POSTGRES_PASSWORD
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth-server
+spec:
+  selector:
+    app: auth-server
+  ports:
+    - port: 7070
+      targetPort: 7070
+  type: LoadBalancer

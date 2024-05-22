@@ -1,0 +1,47 @@
+apiVerion: apps/v1
+kind: Deployment
+metadata:
+  name: catalog-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: catalog-service
+    template:
+      metadata:
+        labels:
+          app: catalog-service
+      spec:
+        containers:
+          - name: catalog-service-container
+            image: tarantul2707/catalog-service
+            imagePullPolicy: Always
+            ports:
+              - containerPort: 8080
+            env:
+              - name: DATABASE_USER
+                valueFrom:
+                  secretKeyRef:
+                    name: mysecret
+                    key: POSTGRES_USER
+              - name: DATABASE_PASSWORD
+                valueFrom:
+                  secretKeyRef:
+                    name: mysecret
+                    key: POSTGRES_PASSWORD
+              - name: AUTH_SERVER_URL
+                value: http://auth-server:7070
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: catalog-service
+spec:
+  selector:
+    app: catalog-service
+  ports:
+    - port: 8080
+      targetPort: 8080
+  type: LoadBalancer

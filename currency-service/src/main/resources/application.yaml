@@ -1,0 +1,27 @@
+spring:
+
+  application:
+    name: currency-service
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${AUTH_SERVER_URL:http://localhost:7070}
+
+  datasource:
+    url: jdbc:postgresql://${DATABASE_URL:localhost}:${DATABASE_PORT:5432}/${DATABASE_NAME:currency_microservice}
+    username: ${DATABASE_USER:postgres}
+    password: ${DATABASE_PASSWORD:pass}
+
+  task:
+    scheduling:
+      pool:
+        size: '2'
+
+scheduling:
+  cron: 0 0 */6 * * *
+  zone: Asia/Bishkek
+exchange:
+  weekly-url: https://www.nbkr.kg/XML/weekly.xml
+  daily-url: https://www.nbkr.kg/XML/daily.xml

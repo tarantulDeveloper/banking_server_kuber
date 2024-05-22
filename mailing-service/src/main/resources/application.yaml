@@ -1,0 +1,26 @@
+
+spring:
+  application:
+    name: mailing-service
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+  mail:
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: 'true'
+          auth: 'true'
+    host: smtp.gmail.com
+    username: softwareupdaterkg@gmail.com
+    protocol: smtps
+    password: rzxfyhxyobryjzsa
+    port: '465'
+    default-encoding: UTF-8
+mail:
+  debug: 'true'

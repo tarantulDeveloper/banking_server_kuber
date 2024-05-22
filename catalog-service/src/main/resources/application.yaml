@@ -1,0 +1,36 @@
+spring:
+
+  application:
+    name: currency-service
+
+  datasource:
+    url: jdbc:postgresql://${DATABASE_URL:localhost}:${DATABASE_PORT:5432}/${DATABASE_NAME:catalog_microservice}
+    username: ${DATABASE_USER:postgres}
+    password: ${DATABASE_PASSWORD:pass}
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${AUTH_SERVER_URL:http://localhost:7070}
+
+  cloud:
+    kubernetes:
+      loadbalancer:
+        mode: service
+
+
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+
+# -- Multipart File Configurations
+
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 50MB
+      max-request-size: 50MB
+      file-size-threshold: 0B
+

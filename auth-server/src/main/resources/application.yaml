@@ -1,0 +1,17 @@
+spring:
+
+  application:
+    name: auth-server
+
+  datasource:
+    url: jdbc:postgresql://${DATABASE_URL:localhost}:${DATABASE_PORT:5432}/${DATABASE_NAME:user_microservice}
+    username: ${DATABASE_USER:postgres}
+    password: ${DATABASE_PASSWORD:pass}
+
+logging:
+  level:
+    org.springframework.security: warn
+
+server:
+  port: 7070
+

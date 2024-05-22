@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: image-service
+
+  servlet:
+    multipart:
+      enabled: 'true'
+      max-request-size: 3MB
+      file-size-threshold: 2KB
+      max-file-size: 3MB
+api:
+  key: ${API_KEY:513882654211428}
+  secret: ${API_SECRET:OUtXhi6FrWwkZobW69qAplHebe4}
+cloud:
+  name: ${CLOUD_NAME:dsvcm1vm4}
